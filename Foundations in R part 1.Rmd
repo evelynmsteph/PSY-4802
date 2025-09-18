@@ -259,9 +259,9 @@ vectors, and dataframes
 
 What's the problem with using R as a big, fancy calculator? We haven't stored anything so we could use it later. Different things that we will need later have different names, but we store them in the same way
 
-nameItsBeingSavedAs \<- thingBeingSaved
+nameItsBeingSavedAs \<- thingBeingSaved "works all the time"
 
-nameThing = thingSaved #DO NOT DO THIS
+nameThing = thingSaved #DO NOT DO THIS "works some of the time"
 
 **Note:** the "assignment operator" (less than sign followed by the hyphen; I was taught to call it a carrot) should be used over an equal sign. There are a lot of reasons for this, but the main one is that R is finicky and different updates and packages read "=" differently, so \<- is safest.
 
