@@ -1,0 +1,81 @@
+---
+title: "foundations in R pt 2 assignment"
+author: "Evelyn Stephens"
+date: "2025-09-30"
+output: html_document
+---
+1. Load the tidyverse library. 
+```{r}
+library(tidyverse)
+```
+
+2. Load the billboard data.
+```{r}
+data(billboard)
+```
+
+3. What type of data is this? (e.g. describe what's in the dataset).
+```{r}
+?billboard
+```
+The dataset has song rankings for the Billboard top 100 in the year 2000. Each song has an artist name, song name, date entered in the top 100, and ranking for each week after it entered.
+
+4. Print the column names from this dataset. 
+```{r}
+colnames(billboard)
+```
+
+5. Print the first 5 entries in the dataset. 
+```{r}
+head(billboard, n = 5)
+```
+
+# Practice
+1. Create a subset of data that has Jay-Z as the only artist. How many songs are in it?
+```{r}
+nrow(subset(billboard, artist == "Jay-Z"))
+```
+
+2. In the original dataset, use filter to find information about the song "All the small things." What was the highest position (i.e. lowest number) this song reached on the billboard 100? 
+```{r}
+billboard %>% filter(track == "All The Small Things")
+```
+Its highest position was 6.
+
+3. Create a subset of data for songs Tim McGraw sang. Summarize the data for wk 1.
+```{r}
+mcgrawSongs <- subset(billboard, artist == "McGraw, Tim")
+summary(mcgrawSongs$wk1)
+```
+
+4. Create a function that can be used to determine if Britney Spears sang the song.
+```{r}
+isSpearsSong <- function(song){
+  billboard$artist == "Spears, Britney"
+}
+```
+
+5. Test your function on the billboard data. Save the results to a new column called "wasItBritney"
+```{r}
+isSpearsSong(billboard)
+billboard$wasItBritney <- isSpearsSong(billboard)
+```
+
+6. Use a for loop to determine if a song placed 50 or below or placed above 50 during the first week.
+```{r}
+for(i in 1:nrow(billboard)){
+  if(billboard$wk1[i] > 50){
+    billboard$wk1Placement[i]<- "above 50"
+  } else{billboard$wk1Placement[i]<- "50 or below"}
+}
+billboard$wk1Placement
+```
+
+7. Use an if else statement to determine the same information as you obtained with the for loop. 
+```{r}
+billboard$wk1Placement2<- ifelse(billboard$wk1>50, "above 50", "50 or below")
+billboard$wk1Placement2
+```
+
+8. Compare your results. 
+The two columns I created are the same.
